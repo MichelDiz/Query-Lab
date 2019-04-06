@@ -1,0 +1,17 @@
+body {
+  padding-top: 10px;
+  background-color: black;
+  -ms-overflow-style: scrollbar;
+  -webkit-app-region:drag;
+}
+
+
+.ui.secondary.menu .item {
+  color: white;
+  -webkit-user-select: none;
+}
+
+.ui.container {
+  color: white;
+  -webkit-user-select: none;
+}

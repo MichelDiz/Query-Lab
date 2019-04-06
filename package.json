@@ -1,0 +1,69 @@
+{
+  "name": "query-lab",
+  "version": "0.0.1",
+  "description": "This is a simple program to test concepts and functionalities that may perhaps be added to the Ratel (Dgraph) or Not. The aim of Query Lab is to run queries and have a simplistic design.",
+  "main": "src/electron.js",
+  "license": "MIT",
+  "author": "Micheldiz",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichelDiz/Query-Lab.git"
+  },
+  "keywords": [
+    "dgraph",
+    "graphq",
+    "lelectron-app",
+    "http-client"
+  ],
+  "bugs": {
+    "url": "https://github.com/MichelDiz/Query-Lab/issues"
+  },
+  "scripts": {
+    "react-start": "parcel -p 3000 index.html --out-dir build",
+    "react-build": "parcel build index.html --out-dir build --public-url ./",
+    "electron-build": "electron-builder -mwl",
+    "clean-build": "rm -rf build/ .cache dist/",
+    "build": "yarn clean-build && yarn react-build && yarn electron-build",
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \""
+  },
+  "dependencies": {
+    "electron-is-dev": "^1.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "semantic-ui-css": "^2.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "electron": "^4.1.4",
+    "electron-builder": "^20.39.0",
+    "parcel-bundler": "^1.12.3",
+    "wait-on": "^3.2.0"
+  },
+  "build": {
+    "appId": "com.dgraph.io",
+    "files": [
+      "src/electron.js",
+      "src/assets/*",
+      "build/**/*"
+    ],
+    "mac": {
+      "target": "dmg",
+      "icon": "src/assets/logo.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/logo.png"
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "src/assets/logo.png",
+      "category": "Development"
+    }
+  }
+}
