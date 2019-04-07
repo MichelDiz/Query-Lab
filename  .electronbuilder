@@ -1,0 +1,44 @@
+{
+  "appId": "com.dgraph.querylab",
+  "publish": false,
+  "protocols": [
+    {
+      "name": "QueryLab",
+      "role": "Viewer"
+    }
+  ],
+  "fileAssociations": [],
+  "directories": {
+    "app": "build",
+    "output": "dist"
+  },
+  "mac": {
+    "category": "public.app-category.developer-tools",
+    "darkModeSupport": true,
+    "target": [
+      "dmg",
+      "zip"
+    ],
+    "icon": "src/assets/logo.png"
+  },
+  "win": {
+    "icon": "src/assets/logo.png",
+    "target": [
+      "squirrel",
+      "zip",
+      "nsis"
+    ]
+  },
+  "linux": {
+    "executableName": "querylab",
+    "synopsis": "...",
+    "category": "Development",
+    "target": [
+      "AppImage",
+      "deb",
+      "tar.gz",
+      "snap",
+      "rpm"
+    ]
+  }
+}

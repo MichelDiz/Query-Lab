@@ -12,7 +12,9 @@ const isDev = require("electron-is-dev");
 
 let mainWindow;
 
-function setApplicationMenu() {
+app.setName('Query Lab');
+
+setApplicationMenu => {
   if (process.platform === 'darwin') {
       const template = [ {
           label: app.getName(),
@@ -22,6 +24,12 @@ function setApplicationMenu() {
               click() {
                   app.quit();
               }
+          },
+          {
+            label: 'New Window',
+            click() {
+              createWindow();
+            }
           } ]
       }, {
           label: 'Edit',
@@ -59,7 +67,17 @@ function setApplicationMenu() {
               selector: 'selectAll:'
           }
           ]
-      } ];
+      },{
+        label: 'Help',
+        submenu: [ {
+            label: 'About'
+        },
+        {
+            label: 'Dgraph Github',
+            click () { require('electron').shell.openExternal('https://github.com/dgraph-io/dgraph') }
+        }
+        ]
+    } ];
 
       Menu.setApplicationMenu(Menu.buildFromTemplate(template));
   } else {
@@ -68,13 +86,15 @@ function setApplicationMenu() {
 }
 
 
-function createWindow() {
-  // Application menu.
-  setApplicationMenu();
+( async () => {
+  await app.whenReady();
+
+  isDev ? null && console.log(Menu) : setApplicationMenu();
 
   const options = {
     // frame: false,
-    titleBarStyle: 'hidden',
+    transparent: true,
+    titleBarStyle: 'hiddenInset',
     width: 900,
     height: 680,
     // x: windowState.x,
@@ -88,8 +108,15 @@ function createWindow() {
         nativeWindowOpen: true
     }
 };
+mainWindow = new BrowserWindow(options);
+isDev ? ( async () => { mainWindow.webContents.openDevTools(),
+mainWindow.webContents.on('devtools-opened', () => {
+  setImmediate(() => {
+      // do whatever you want to do after dev tool completely opened here
+      mainWindow.focus();
+  });
+}) })() : null;
 
-  mainWindow = new BrowserWindow(options);
 
   mainWindow.loadURL(
     isDev
@@ -97,9 +124,8 @@ function createWindow() {
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
   mainWindow.on("closed", () => (mainWindow = null));
-}
 
-app.on("ready", createWindow);
+  })();
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

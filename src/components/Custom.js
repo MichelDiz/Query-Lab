@@ -1,5 +1,8 @@
 import React from "react";
 
+// TODO: Use react-dock to simulate a terminal.
+//import Dock from "react-dock";
+
 const Custom = () => {
   return (
     <div className="ui container">
@@ -21,6 +24,10 @@ const Custom = () => {
         </span>{" "}
         = Awesomeness ! 🎉
       </h3>
+      {/* <Dock position='bottom' isVisible={true} style={{ background: 'rgba(0, 0, 100, 0.2)' }}>
+      <h3 style={{ color: "black"}}>teste </h3>
+      <div onClick={() => this.setState({ isVisible: !this.state.isVisible })}>X</div>
+    </Dock> */}
     </div>
   );
 };

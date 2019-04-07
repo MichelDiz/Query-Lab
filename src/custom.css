@@ -1,6 +1,7 @@
 body {
-  padding-top: 10px;
-  background-color: black;
+  padding-top: 30px;
+ /* margin-left: -40px; */
+  /* background-color: rgba(0, 0, 0, 0.92); */
   -ms-overflow-style: scrollbar;
   -webkit-app-region:drag;
 }
@@ -9,9 +10,30 @@ body {
 .ui.secondary.menu .item {
   color: white;
   -webkit-user-select: none;
+  -webkit-app-region: no-drag;
 }
 
 .ui.container {
   color: white;
   -webkit-user-select: none;
+  -webkit-app-region: no-drag;
+}
+.avengers-tab-list {
+  padding-left: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  -webkit-app-region: no-drag;
+  -webkit-user-select: none;
+}
+.react-tabs__tab {
+  min-width: 50px;
+  width: 62px;
+  height: 54px;
+  -webkit-app-region: no-drag;
+  -webkit-user-select: none;
+}
+
+.avengers-tab-panel {
+  -webkit-app-region: no-drag;
+  /* -webkit-user-select: none; */
 }
