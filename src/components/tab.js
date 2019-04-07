@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
 import styled from 'styled-components';
 
+import Editor from "./Editor";
 class TAB extends React.Component {
   constructor(props) {
     super(props);
@@ -70,7 +71,7 @@ class TAB extends React.Component {
 
       tabPanels.push(
         <TabPanel style={{ backgroundColor, color }} className="avengers-tab-panel">
-          {desc}
+          <Editor code={desc}/>
         </TabPanel>
       );
     });
