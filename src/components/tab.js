@@ -9,15 +9,64 @@ class TAB extends React.Component {
     super(props);
 
     this.characters = {
-      "Ant-Man": { img: "https://reactcommunity.org/react-tabs/eec97ae821295f42e3969e082be11fac.png", color: "transparent", text: "white", desc: "\"I do some dumb things, and the people I love the most...they pay the price.\"" },
-      "Black Widow": { img: "dc7c0d83df799ed15f34db84db753c2d.png", color: "transparent", text: "white", desc: "\"After everything that happened with S.H.I.E.L.D., during my little hiatus, I went back to Russia and tried to find my parents. Two little graves linked by a chain fence. I pulled some weeds and left some flowers. We have what we have when we have it.\"" },
-      "Captain America": { img: "4f8297f3fffb0d2e1c13ce33115ffb90.png", color: "transparent", text: "white", desc: "\"I'm not looking for forgiveness. And I'm way past asking for permission. Earth just lost their best defender. So we're here to fight. If you wanna stay in our way... we'll fight you, too.\"" },
-      "Director Fury": { img: "00f135cda1d4ed226caaf27e9618a1e2.png", color: "transparent", text: "white", desc: "\"Back in the day, I had eyes everywhere, ears everywhere else. Here we all are, back on earth, with nothing but our wit, and our will to save the world. So stand. Outwit the platinum bastard.\"" },
-      Hawkeye: { img: "e9485cf3b0a42c3ba54cacd5434005d2.png", color: "transparent", text: "white", desc: "\"Just can't seem to miss.\"" },
-      "Iron Man": { img: "6b5cc191fa84fcc51c24799c6dc37868.png", color: "transparent", text: "black", desc: "\"My armor was never a distraction or a hobby. It was a cocoon. And now I'm a changed man. You can take away my house, all my tricks and toys. But one thing you can't take away... I am Iron Man.\"" },
-      Loki: { img: "600d5d43a0656a727d94daed3eae7b63.png", color: "transparent", text: "black", desc: "\"I, Loki, Prince of Asgard, Odinson, the rightful King of Jotunheim, God of Mischief, do hereby pledge to you, my undying fidelity.\"" },
-      Thor: { img: "937edaf1f5a053fee90516eb7afcd976.png", color: "transparent", text: "black", desc: "\"You know I’m 1500 years old. I’ve killed twice as many enemies as that. And every one of them would have rather killed me than not succeeded. I’m only alive because fate wants me alive. Thanos is just the latest of a long line of bastards, and he’ll be the latest to feel my vengeance. Fate wills it so.\"" },
-      "War Machine": { img: "fcfaa690ada0842b3c593cc649b9faf2.png", color: "transparent", text: "black", desc: "\"138 combat missions. That's how many I've flown, Tony. Every one of them could've been my last, but I flew 'em. Because the fight needed to be fought.\"" }
+      "Ant-Man": { img: "https://reactcommunity.org/react-tabs/eec97ae821295f42e3969e082be11fac.png", color: "transparent", text: "white", desc: `{
+        bladerunner(func: uid(0x579683)) {
+          uid
+          name@en
+          initial_release_date
+          netflix_id
+        }
+      }` },
+      "Black Widow": { img: "https://reactcommunity.org/react-tabs/eec97ae821295f42e3969e082be11fac.png", color: "transparent", text: "white", desc: `{
+        scott(func: eq(name@en, "Ridley Scott")) {
+          name@en
+          initial_release_date
+          director.film @filter(le(initial_release_date, "2000")) {
+            name@en
+            initial_release_date
+          }
+        }
+      }` },
+      "Captain America": { img: "https://reactcommunity.org/react-tabs/eec97ae821295f42e3969e082be11fac.png", color: "transparent", text: "white", desc: `{
+        var(func: eq(name@en,"Minority Report")) {
+          d as initial_release_date
+        }
+      
+        me(func: eq(name@en, "Steven Spielberg")) {
+          name@en
+          director.film @filter(ge(initial_release_date, val(d))) {
+            initial_release_date
+            name@en
+          }
+        }
+      }
+      ` },
+      "Director Fury": { img: "https://reactcommunity.org/react-tabs/eec97ae821295f42e3969e082be11fac.png", color: "transparent", text: "white", desc: `{
+        ID as var(func: allofterms(name@en, "Steven")) @filter(has(director.film)) {
+          director.film {
+            num_actors as count(starring)
+          }
+          average as avg(val(num_actors))
+        }
+      
+        films(func: uid(ID)) {
+          director_id : uid
+          english_name : name@en
+          average_actors : val(average)
+          num_films : count(director.film)
+      
+          films : director.film {
+            name : name@en
+            english_name : name@en
+            french_name : name@fr
+          }
+        }
+      }` },
+      Hawkeye: { img: "https://reactcommunity.org/react-tabs/eec97ae821295f42e3969e082be11fac.png", color: "transparent", text: "white", desc: "\"Just can't seem to miss.\"" },
+      "Iron Man": { img: "https://reactcommunity.org/react-tabs/eec97ae821295f42e3969e082be11fac.png", color: "transparent", text: "black", desc: "\"My armor was never a distraction or a hobby. It was a cocoon. And now I'm a changed man. You can take away my house, all my tricks and toys. But one thing you can't take away... I am Iron Man.\"" },
+      Loki: { img: "https://reactcommunity.org/react-tabs/eec97ae821295f42e3969e082be11fac.png", color: "transparent", text: "black", desc: "\"I, Loki, Prince of Asgard, Odinson, the rightful King of Jotunheim, God of Mischief, do hereby pledge to you, my undying fidelity.\"" },
+      Thor: { img: "https://reactcommunity.org/react-tabs/eec97ae821295f42e3969e082be11fac.png", color: "transparent", text: "black", desc: "\"You know I’m 1500 years old. I’ve killed twice as many enemies as that. And every one of them would have rather killed me than not succeeded. I’m only alive because fate wants me alive. Thanos is just the latest of a long line of bastards, and he’ll be the latest to feel my vengeance. Fate wills it so.\"" },
+      "War Machine": { img: "https://reactcommunity.org/react-tabs/eec97ae821295f42e3969e082be11fac.png", color: "transparent", text: "black", desc: "\"138 combat missions. That's how many I've flown, Tony. Every one of them could've been my last, but I flew 'em. Because the fight needed to be fought.\"" }
     };
 
     this.state = {
