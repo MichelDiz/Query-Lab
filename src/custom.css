@@ -1,11 +1,10 @@
 body {
-  padding-top: 30px;
+  padding-top: 40px;
  /* margin-left: -40px; */
-  /* background-color: rgba(0, 0, 0, 0.92); */
+  background-color: rgba(0, 0, 0, 0.92);
   -ms-overflow-style: scrollbar;
   -webkit-app-region:drag;
 }
-
 
 .ui.secondary.menu .item {
   color: white;

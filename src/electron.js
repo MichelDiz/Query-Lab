@@ -138,3 +138,9 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+// var screenElectron = electron.screen;
+// var mainScreen = screenElectron.getPrimaryDisplay();
+// var allScreens = screenElectron.getAllDisplays();
+
+// console.log(mainScreen, allScreens);
